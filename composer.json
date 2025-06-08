@@ -1,7 +1,7 @@
 {
   "name": "wundii/data-mapper-symfony-bundle",
   "type": "symfony-bundle",
-  "description": "Symfony Bundle for Wundii Data Mapper",
+  "description": "A Symfony Bundle for modern deserialization and mapping of XML, JSON and arrays in PHP classes - optimized for PHP 8.2+",
   "keywords": ["symfony","symfony-bundle","bundle","datamapper","mapper","xml","json","array","object", "deserialization", "deserialize"],
   "license": "MIT",
   "authors": [
