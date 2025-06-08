@@ -8,25 +8,16 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 use Wundii\DataMapper\DataConfig;
 use Wundii\DataMapper\DataMapper;
-use Wundii\DataMapper\SymfonyBundle\src\Command\DumpDefaultConfigCommand;
+use Wundii\DataMapper\SymfonyBundle\Command\DefaultConfigCommand;
 
 return function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
-
-    // $services->set(DataConfig::class)
-    //     ->args([
-    //         ApproachEnum::SETTER,
-    //         AccessibleEnum::PUBLIC,
-    //         [
-    //             DateTimeInterface::class => DateTime::class,
-    //         ]
-    //     ]);
 
     $services->set(DataMapper::class)
         ->arg('$dataConfig', new ReferenceConfigurator(DataConfig::class))
         ->public();
 
-    $services->set(DumpDefaultConfigCommand::class)
+    $services->set(DefaultConfigCommand::class)
         ->autowire()
         ->autoconfigure()
         ->public();

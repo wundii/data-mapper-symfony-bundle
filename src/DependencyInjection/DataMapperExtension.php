@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Wundii\DataMapper\SymfonyBundle\src\DependencyInjection;
+namespace Wundii\DataMapper\SymfonyBundle\DependencyInjection;
 
 use Exception;
 use Symfony\Component\Config\FileLocator;
@@ -20,16 +20,27 @@ class DataMapperExtension extends Extension
     /**
      * @throws Exception
      */
-    public function load(array $configs, ContainerBuilder $containerBuilder): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../Resources/config'));
+        $phpFileLoader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $phpFileLoader->load('services.php');
 
-        $approachEnum = ApproachEnum::${$config['approach']};
-        $accessibleEnum = AccessibleEnum::${$config['accessible']};
+        $approach = $config['approach'];
+        $accessible = $config['accessible'];
+
+        if (! is_string($approach)) {
+            throw new Exception('The "approach" configuration must be a string.');
+        }
+
+        if (! is_string($accessible)) {
+            throw new Exception('The "accessible" configuration must be a string.');
+        }
+
+        $approachEnum = ApproachEnum::tryFrom(strtolower($approach));
+        $accessibleEnum = AccessibleEnum::tryFrom(strtolower($accessible));
         $classMap = $config['class_map'];
 
         $dataConfigDef = new Definition(DataConfig::class, [
@@ -37,12 +48,12 @@ class DataMapperExtension extends Extension
             $accessibleEnum,
             $classMap,
         ]);
-        $containerBuilder->setDefinition(DataConfig::class, $dataConfigDef);
+        $container->setDefinition(DataConfig::class, $dataConfigDef);
 
         $dataMapperDef = new Definition(DataMapper::class, [
             $dataConfigDef,
         ]);
-        $containerBuilder->setDefinition(DataMapper::class, $dataMapperDef);
+        $container->setDefinition(DataMapper::class, $dataMapperDef);
     }
 
     public function getXsdValidationBasePath(): string|false

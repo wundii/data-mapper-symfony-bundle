@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Wundii\DataMapper\SymfonyBundle\src;
+namespace Wundii\DataMapper\SymfonyBundle;
 
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Wundii\DataMapper\SymfonyBundle\src\DependencyInjection\DataMapperExtension;
+use Wundii\DataMapper\SymfonyBundle\DependencyInjection\DataMapperExtension;
 
 class DataMapperBundle extends Bundle
 {

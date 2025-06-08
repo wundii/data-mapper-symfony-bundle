@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
+use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\Config\RectorConfig;
@@ -34,5 +35,8 @@ return static function (RectorConfig $rectorConfig): void
 
     $rectorConfig->skip([
         ExplicitBoolCompareRector::class,
+        RenameParamToMatchTypeRector::class => [
+            __DIR__ . '/src/DependencyInjection/DataMapperExtension.php',
+        ],
     ]);
 };

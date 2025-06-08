@@ -1,5 +1,15 @@
 # Wundii\Data-Mapper-Symfony-Bundle
 
+[![PHP-Tests](https://github.com/wundii/data-mapper-symfony-bundle/actions/workflows/code_quality.yml/badge.svg)](https://github.com/wundii/data-mapper-symfony-bundle/actions/workflows/code_quality.yml)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%209-brightgreen.svg?style=flat)](https://phpstan.org/)
+[![VERSION](https://img.shields.io/packagist/-v/wundii/data-mapper-symfony-bundle)]
+[![PHP](https://img.shields.io/packagist/php-v/wundii/data-mapper-symfony-bundle)](https://www.php.net/)
+[![Rector](https://img.shields.io/badge/Rector-8.2-blue.svg?style=flat)](https://getrector.com)
+[![ECS](https://img.shields.io/badge/ECS-check-blue.svg?style=flat)](https://tomasvotruba.com/blog/zen-config-in-ecs)
+[![PHPUnit](https://img.shields.io/badge/PHP--Unit-check-blue.svg?style=flat)](https://phpunit.org)
+[![codecov](https://codecov.io/github/wundii/data-mapper-symfony-bundle/branch/main/graph/badge.svg?token=cb7efb4edf7e1a31909c63e5a9fd4b814f000166)](https://app.codecov.io/github/wundii/data-mapper-symfony-bundle)
+[![Downloads](https://img.shields.io/packagist/dt/wundii/data-mapper-symfony-bundle.svg?style=flat)](https://packagist.org/packages/wundii/data-mapper-symfony-bundle)
+
 A Symfony bundle providing seamless integration for the [Wundii Data Mapper](https://github.com/wundii/data-mapper).
 
 ## Features

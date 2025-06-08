@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Datei: datamapper-1.0.xsd -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns="http://wundii.com/schema/dic/data_mapper"
             targetNamespace="http://wundii.com/schema/dic/data_mapper"
@@ -13,13 +12,12 @@
             <!-- enumNode 'approach' -->
             <xsd:element name="approach" type="ApproachEnumType" minOccurs="0"/>
             <!-- enumNode 'accessibleEnum' -->
-            <xsd:element name="accessibleEnum" type="AccessibleEnumType" minOccurs="0"/>
+            <xsd:element name="accessible" type="AccessibleEnumType" minOccurs="0"/>
             <!-- arrayNode 'class_map' -->
             <xsd:element name="class_map" type="ClassMapType" minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
 
-    <!-- Mögliche Enum-Werte bitte ggf. zu deinen echten Werten anpassen! -->
     <xsd:simpleType name="ApproachEnumType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="CONSTRUCTOR"/>
@@ -34,7 +32,6 @@
         </xsd:restriction>
     </xsd:simpleType>
 
-    <!-- class_map als Liste von <entry key="...">VALUE</entry> -->
     <xsd:complexType name="ClassMapType">
         <xsd:sequence>
             <xsd:element name="entry" minOccurs="0" maxOccurs="unbounded">
