@@ -10,8 +10,8 @@ use Wundii\DataMapper\DataConfig;
 use Wundii\DataMapper\DataMapper;
 use Wundii\DataMapper\SymfonyBundle\src\Command\DumpDefaultConfigCommand;
 
-return function (ContainerConfigurator $configurator) {
-    $services = $configurator->services();
+return function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
 
     // $services->set(DataConfig::class)
     //     ->args([

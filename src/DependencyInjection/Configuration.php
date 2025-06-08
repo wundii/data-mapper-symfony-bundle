@@ -16,23 +16,25 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('data_mapper');
+
+        /** @phpstan-ignore-next-line  */
         $treeBuilder->getRootNode()
             ->children()
-                ->enumNode('approach')
-                    ->values(ApproachEnum::cases())
-                    ->defaultValue('SETTER')
-                ->end()
-                ->enumNode('accessible')
-                    ->values(AccessibleEnum::cases())
-                    ->defaultValue('PUBLIC')
-                ->end()
-                ->arrayNode('class_map')
-                    ->useAttributeAsKey('interface')
-                    ->scalarPrototype()->end()
-                    ->defaultValue([
-                        DateTimeInterface::class => DateTime::class
-                    ])
-                ->end()
+            ->enumNode('approach')
+            ->values(ApproachEnum::cases())
+            ->defaultValue('SETTER')
+            ->end()
+            ->enumNode('accessible')
+            ->values(AccessibleEnum::cases())
+            ->defaultValue('PUBLIC')
+            ->end()
+            ->arrayNode('class_map')
+            ->useAttributeAsKey('interface')
+            ->scalarPrototype()->end()
+            ->defaultValue([
+                DateTimeInterface::class => DateTime::class,
+            ])
+            ->end()
             ->end();
 
         return $treeBuilder;

@@ -20,16 +20,16 @@ class DataMapperExtension extends Extension
     /**
      * @throws Exception
      */
-    public function load(array $configs, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $containerBuilder): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.php');
+        $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../Resources/config'));
+        $phpFileLoader->load('services.php');
 
-        $approachEnum = ApproachEnum::{$config['approach']};
-        $accessibleEnum = AccessibleEnum::{$config['accessible']};
+        $approachEnum = ApproachEnum::${$config['approach']};
+        $accessibleEnum = AccessibleEnum::${$config['accessible']};
         $classMap = $config['class_map'];
 
         $dataConfigDef = new Definition(DataConfig::class, [
@@ -37,16 +37,16 @@ class DataMapperExtension extends Extension
             $accessibleEnum,
             $classMap,
         ]);
-        $container->setDefinition(DataConfig::class, $dataConfigDef);
+        $containerBuilder->setDefinition(DataConfig::class, $dataConfigDef);
 
         $dataMapperDef = new Definition(DataMapper::class, [
-            $dataConfigDef
+            $dataConfigDef,
         ]);
-        $container->setDefinition(DataMapper::class, $dataMapperDef);
+        $containerBuilder->setDefinition(DataMapper::class, $dataMapperDef);
     }
 
     public function getXsdValidationBasePath(): string|false
     {
-        return __DIR__.'/../Resources/config/schema';
+        return __DIR__ . '/../Resources/config/schema';
     }
 }
