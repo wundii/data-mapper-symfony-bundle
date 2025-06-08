@@ -11,9 +11,15 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class DefaultConfigCommand extends Command
 {
-    protected static string $defaultName = 'data-mapper:default-config';
+    /**
+     * @phpstan-ignore-next-line
+     */
+    protected static $defaultDescription = 'Create a default configuration file for the DataMapper bundle: config/packages/data_mapper.yaml';
 
-    protected static string $defaultDescription = 'Create a default configuration file for the DataMapper bundle: config/packages/data_mapper.yaml';
+    /**
+     * @phpstan-ignore-next-line
+     */
+    protected static $defaultName = 'data-mapper:default-config';
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
