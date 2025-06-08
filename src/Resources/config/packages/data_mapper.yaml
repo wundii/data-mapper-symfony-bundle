@@ -1,5 +1,5 @@
 data_mapper:
-  approach: 'SETTER'
-  accessible: 'PUBLIC'
+  approach: SETTER
+  accessible: PUBLIC
   class_map:
     DateTimeInterface: DateTime
