@@ -1,0 +1,5 @@
+data_mapper:
+  approach: 'SETTER'
+  accessibleEnum: 'PUBLIC'
+  class_map:
+    DateTimeInterface: DateTimeImmutable

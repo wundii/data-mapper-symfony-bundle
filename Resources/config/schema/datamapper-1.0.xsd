@@ -1,15 +1,51 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xsd:schema xmlns="http://symfony.com/schema/dic/services"
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            targetNamespace="http://symfony.com/schema/dic/services"
-            elementFormDefault="qualified">
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Datei: datamapper-1.0.xsd -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://wundii.com/schema/dic/data_mapper"
+            targetNamespace="http://wundii.com/schema/dic/data_mapper"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified">
 
-    <xsd:element name="config" type="config" />
+    <xsd:element name="config" type="ConfigType"/>
 
-    <xsd:complexType name="config">
-        <xsd:attribute name="max-items" type="xsd:integer" />
-        <xsd:attribute name="min-depth" type="xsd:integer" />
-        <xsd:attribute name="max-string-length" type="xsd:integer" />
-        <xsd:attribute name="dump-destination" type="xsd:string" />
+    <xsd:complexType name="ConfigType">
+        <xsd:sequence>
+            <!-- enumNode 'approach' -->
+            <xsd:element name="approach" type="ApproachEnumType" minOccurs="0"/>
+            <!-- enumNode 'accessibleEnum' -->
+            <xsd:element name="accessibleEnum" type="AccessibleEnumType" minOccurs="0"/>
+            <!-- arrayNode 'class_map' -->
+            <xsd:element name="class_map" type="ClassMapType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Mögliche Enum-Werte bitte ggf. zu deinen echten Werten anpassen! -->
+    <xsd:simpleType name="ApproachEnumType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CONSTRUCTOR"/>
+            <xsd:enumeration value="PROPERTY"/>
+            <xsd:enumeration value="SETTER"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="AccessibleEnumType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="PRIVATE"/>
+            <xsd:enumeration value="PUBLIC"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <!-- class_map als Liste von <entry key="...">VALUE</entry> -->
+    <xsd:complexType name="ClassMapType">
+        <xsd:sequence>
+            <xsd:element name="entry" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute name="key" type="xsd:string" use="required"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Wundii\DataMapper\SymfonyBundle\DependencyInjection;
 
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use Wundii\DataMapper\DataConfig;
+use Wundii\DataMapper\DataMapper;
+use Wundii\DataMapper\Enum\AccessibleEnum;
+use Wundii\DataMapper\Enum\ApproachEnum;
 
 class DataMapperExtension extends Extension
 {
@@ -18,55 +20,21 @@ class DataMapperExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.php');
+        $approach = ApproachEnum::{$config['approach']};
+        $accessibleEnum = AccessibleEnum::{$config['accessible']};
+        $classMap = $config['class_map'];
 
-        $container->getDefinition('var_dumper.cloner')
-            ->addMethodCall('setMaxItems', [$config['max_items']])
-            ->addMethodCall('setMinDepth', [$config['min_depth']])
-            ->addMethodCall('setMaxString', [$config['max_string_length']])
-            ->addMethodCall('addCasters', [ReflectionCaster::UNSET_CLOSURE_FILE_INFO]);
+        $dataConfigDef = new Definition(DataConfig::class, [
+            $approach,
+            $accessibleEnum,
+            $classMap,
+        ]);
+        $container->setDefinition(DataConfig::class, $dataConfigDef);
 
-        if ('dark' !== $config['theme']) {
-            $container->getDefinition('var_dumper.html_dumper')
-                ->addMethodCall('setTheme', [$config['theme']]);
-        }
-
-        if (null === $config['dump_destination']) {
-            // $container->getDefinition('var_dumper.command.server_dump')
-            //     ->setClass(ServerDumpPlaceholderCommand::class)
-            // ;
-        } elseif (str_starts_with($config['dump_destination'], 'tcp://')) {
-            $container->getDefinition('debug.dump_listener')
-                ->replaceArgument(2, new Reference('var_dumper.server_connection'))
-            ;
-            $container->getDefinition('data_collector.dump')
-                ->replaceArgument(4, new Reference('var_dumper.server_connection'))
-            ;
-            $container->getDefinition('var_dumper.dump_server')
-                ->replaceArgument(0, $config['dump_destination'])
-            ;
-            $container->getDefinition('var_dumper.server_connection')
-                ->replaceArgument(0, $config['dump_destination'])
-            ;
-        } else {
-            $container->getDefinition('var_dumper.cli_dumper')
-                ->replaceArgument(0, $config['dump_destination'])
-            ;
-            $container->getDefinition('data_collector.dump')
-                ->replaceArgument(4, new Reference('var_dumper.cli_dumper'))
-            ;
-        }
-
-        $container->getDefinition('var_dumper.cli_dumper')
-            ->addMethodCall('setDisplayOptions', [[
-                'fileLinkFormat' => new Reference('debug.file_link_formatter', ContainerBuilder::IGNORE_ON_INVALID_REFERENCE),
-            ]])
-        ;
-
-        // if (!class_exists(Command::class) || !class_exists(ServerLogCommand::class)) {
-        //     $container->removeDefinition('monolog.command.server_log');
-        // }
+        $dataMapperDef = new Definition(DataMapper::class, [
+            $dataConfigDef
+        ]);
+        $container->setDefinition(DataMapper::class, $dataMapperDef);
     }
 
     public function getXsdValidationBasePath(): string|false
