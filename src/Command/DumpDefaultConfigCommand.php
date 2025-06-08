@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Wundii\DataMapper\SymfonyBundle\Command;
+namespace Wundii\DataMapper\SymfonyBundle\src\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,9 +11,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class DumpDefaultConfigCommand extends Command
 {
-    protected static $defaultName = 'data-mapper:dump-default-config';
+    protected static $defaultName = 'data-mapper:default-config';
 
-    protected static $defaultDescription = 'Lege eine Beispiel-Datei config/packages/data_mapper.yaml an.';
+    protected static $defaultDescription = 'Create a default configuration file for the DataMapper bundle: config/packages/data_mapper.yaml';
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -26,18 +26,18 @@ class DumpDefaultConfigCommand extends Command
         }
 
         if (file_exists($configFile)) {
-            $io->warning('Die Datei config/packages/data_mapper.yaml existiert bereits.');
+            $io->warning('The file config/packages/data_mapper.yaml already exists. No changes were made.');
             return Command::FAILURE;
         }
 
         $defaultConfig = file_get_contents(__DIR__.'/../Resources/config/packages/data_mapper.yaml');
         if ($defaultConfig === false) {
-            $io->error('Die Standardkonfigurationsdatei konnte nicht geladen werden.');
+            $io->error('Could not read the default configuration file.');
             return Command::FAILURE;
         }
 
         file_put_contents($configFile, $defaultConfig);
-        $io->success('Die Datei config/packages/data_mapper.yaml wurde erstellt.');
+        $io->success('Default configuration file created at config/packages/data_mapper.yaml');
 
         return Command::SUCCESS;
     }

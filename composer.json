@@ -24,18 +24,65 @@
     "symfony/http-kernel": "^6.4||^7.0",
     "wundii/data-mapper": "^1.0"
   },
+  "require-dev": {
+    "phpstan/phpstan": "^2.0",
+    "phpstan/phpstan-strict-rules": "^2.0",
+    "phpunit/phpunit": "^11.4",
+    "rector/rector": "^2.0",
+    "symfony/var-dumper": "^7.0",
+    "symplify/easy-coding-standard": "^12.3",
+    "wundii/phplint": "^0.3"
+  },
   "autoload": {
     "psr-4": {
-      "Wundii\\DataMapper\\SymfonyBundle\\": ""
-    },
-    "exclude-from-classmap": [
-      "/Tests/"
-    ]
+      "Wundii\\DataMapper\\SymfonyBundle\\": "src/"
+    }
   },
   "autoload-dev": {
     "psr-4": {
-      "Wundii\\DataMapper\\SymfonyBundle\\Tests\\": "Tests/"
+      "Wundii\\DataMapper\\SymfonyBundle\\Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "auto-scripts": {
+    },
+    "post-install-cmd": [
+      "@auto-scripts"
+    ],
+    "post-update-cmd": [
+      "@auto-scripts"
+    ],
+    "complete-check": [
+      "@cache-clear",
+      "@rector-dry",
+      "@phpstan",
+      "@ecs-dry",
+      "@unittest"
+    ],
+    "rector-dry": [
+      "php vendor/bin/rector process --dry-run --ansi"
+    ],
+    "rector-apply": [
+      "php vendor/bin/rector process --ansi"
+    ],
+    "ecs-dry": [
+      "php vendor/bin/ecs check"
+    ],
+    "ecs-apply": [
+      "php vendor/bin/ecs check --fix"
+    ],
+    "phpstan": [
+      "php vendor/bin/phpstan analyse"
+    ],
+    "unittest": [
+      "php vendor/bin/phpunit --configuration phpunit.xml"
+    ],
+    "cache-clear": [
+      "rm -R ./Cache/* -f"
+    ],
+    "phplint": [
+      "php vendor/bin/phplint"
+    ]
   },
   "minimum-stability": "dev"
 }

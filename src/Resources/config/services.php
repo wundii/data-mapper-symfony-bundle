@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace Wundii\DataMapper\SymfonyBundle\Resources\Config;
 
-use DateTime;
-use DateTimeInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 use Wundii\DataMapper\DataConfig;
 use Wundii\DataMapper\DataMapper;
-use Wundii\DataMapper\Enum\AccessibleEnum;
-use Wundii\DataMapper\Enum\ApproachEnum;
-use Wundii\DataMapper\SymfonyBundle\Command\DumpDefaultConfigCommand;
+use Wundii\DataMapper\SymfonyBundle\src\Command\DumpDefaultConfigCommand;
 
 return function (ContainerConfigurator $configurator) {
     $services = $configurator->services();

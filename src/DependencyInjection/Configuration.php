@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Wundii\DataMapper\SymfonyBundle\DependencyInjection;
+namespace Wundii\DataMapper\SymfonyBundle\src\DependencyInjection;
 
 use DateTime;
 use DateTimeInterface;
