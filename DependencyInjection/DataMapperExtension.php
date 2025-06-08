@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Wundii\DataMapper\SymfonyBundle\DependencyInjection;
 
+use Exception;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Wundii\DataMapper\DataConfig;
 use Wundii\DataMapper\DataMapper;
@@ -15,10 +18,16 @@ use Wundii\DataMapper\Enum\ApproachEnum;
 
 class DataMapperExtension extends Extension
 {
+    /**
+     * @throws Exception
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.php');
 
         $approachEnum = ApproachEnum::{$config['approach']};
         $accessibleEnum = AccessibleEnum::{$config['accessible']};

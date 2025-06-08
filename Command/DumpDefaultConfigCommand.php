@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wundii\DataMapper\SymfonyBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -10,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class DumpDefaultConfigCommand extends Command
 {
     protected static $defaultName = 'data-mapper:dump-default-config';
+
     protected static $defaultDescription = 'Lege eine Beispiel-Datei config/packages/data_mapper.yaml an.';
 
     protected function execute(InputInterface $input, OutputInterface $output): int

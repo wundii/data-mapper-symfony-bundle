@@ -34,5 +34,4 @@ return function (ContainerConfigurator $configurator) {
         ->autowire()
         ->autoconfigure()
         ->public();
-
 };
