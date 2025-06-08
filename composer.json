@@ -18,7 +18,8 @@
     "ext-simplexml": "*",
     "ext-spl": "*",
     "ext-xml": "*",
-    "symfony/config": "^6.4 || ^7.3",
+    "symfony/config": "^6.4 || ^7.0",
+    "symfony/console": "^6.4 || ^7.0",
     "symfony/dependency-injection": "^6.4||^7.0",
     "symfony/http-kernel": "^6.4||^7.0",
     "wundii/data-mapper": "^1.0"
