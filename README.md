@@ -52,11 +52,11 @@ Include the bundle in your `bundles.php`:
 ```php
 return [
     // ...
-    Wundii\DataMapperBundle\WundiiDataMapperBundle::class => ['all' => true],
+    Wundii\DataMapper\SymfonyBundle\DataMapperBundle::class => ['all' => true],
 ];
 ```
 
-Create a symfony configuration file `config/packages/data_mapper.yaml`:
+Create a Symfony configuration file `config/packages/data_mapper.yaml` with the command:
 
 ```bash
 bin/console data-mapper:default-config
