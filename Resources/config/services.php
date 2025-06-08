@@ -12,6 +12,7 @@ use Wundii\DataMapper\DataConfig;
 use Wundii\DataMapper\DataMapper;
 use Wundii\DataMapper\Enum\AccessibleEnum;
 use Wundii\DataMapper\Enum\ApproachEnum;
+use Wundii\DataMapper\SymfonyBundle\Command\DumpDefaultConfigCommand;
 
 return function (ContainerConfigurator $configurator) {
     $services = $configurator->services();
@@ -28,4 +29,10 @@ return function (ContainerConfigurator $configurator) {
     $services->set(DataMapper::class)
         ->arg('$dataConfig', new ReferenceConfigurator(DataConfig::class))
         ->public();
+
+    $services->set(DumpDefaultConfigCommand::class)
+        ->autowire()
+        ->autoconfigure()
+        ->public();
+
 };
