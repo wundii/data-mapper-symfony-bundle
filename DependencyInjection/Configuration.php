@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
                     ->values(ApproachEnum::cases())
                     ->defaultValue('SETTER')
                 ->end()
-                ->enumNode('accessibleEnum')
+                ->enumNode('accessible')
                     ->values(AccessibleEnum::cases())
                     ->defaultValue('PUBLIC')
                 ->end()

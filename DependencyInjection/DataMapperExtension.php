@@ -20,12 +20,12 @@ class DataMapperExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $approach = ApproachEnum::{$config['approach']};
+        $approachEnum = ApproachEnum::{$config['approach']};
         $accessibleEnum = AccessibleEnum::{$config['accessible']};
         $classMap = $config['class_map'];
 
         $dataConfigDef = new Definition(DataConfig::class, [
-            $approach,
+            $approachEnum,
             $accessibleEnum,
             $classMap,
         ]);
