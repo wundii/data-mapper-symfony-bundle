@@ -30,7 +30,7 @@ class DumpDefaultConfigCommand extends Command
             return Command::FAILURE;
         }
 
-        $defaultConfig = file_get_contents(__DIR__.'/../Resources/config/data_mapper.yaml');
+        $defaultConfig = file_get_contents(__DIR__.'/../Resources/config/packages/data_mapper.yaml');
         if ($defaultConfig === false) {
             $io->error('Die Standardkonfigurationsdatei konnte nicht geladen werden.');
             return Command::FAILURE;
