@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wundii\DataMapper\SymfonyBundle\Tests;
 
 use DateTime;
-use DateTimeImmutable;
 use DateTimeInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Processor;
@@ -38,7 +37,7 @@ class ConfigurationTest extends TestCase
             'approach' => 'CONSTRUCTOR',
             'accessible' => 'PRIVATE',
             'class_map' => [
-                DateTimeInterface::class => DateTimeImmutable::class,
+                DateTimeInterface::class => DateTime::class,
                 'Foo' => 'Bar',
             ],
         ]];
@@ -47,7 +46,7 @@ class ConfigurationTest extends TestCase
 
         $this->assertSame('CONSTRUCTOR', $config['approach']);
         $this->assertSame('PRIVATE', $config['accessible']);
-        $this->assertSame(DateTimeImmutable::class, $config['class_map'][DateTimeInterface::class]);
+        $this->assertSame(DateTime::class, $config['class_map'][DateTimeInterface::class]);
         $this->assertSame('Bar', $config['class_map']['Foo']);
     }
 }
