@@ -10,6 +10,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\StreamOutput;
 use Wundii\DataMapper\SymfonyBundle\Command\DefaultConfigCommand;
 
 class DefaultConfigCommandTest extends TestCase
@@ -22,6 +23,8 @@ class DefaultConfigCommandTest extends TestCase
 
     private string $defaultConfigFile;
 
+    private OutputInterface $output;
+
     protected function setUp(): void
     {
         $this->tempDir = sys_get_temp_dir() . '/datamapper_test_' . uniqid();
@@ -31,11 +34,30 @@ class DefaultConfigCommandTest extends TestCase
         $this->configFile = $this->configDir . '/data_mapper.yaml';
 
         $this->defaultConfigFile = dirname(__DIR__) . '/src/Resources/config/packages/data_mapper.yaml';
+
+        $this->output = new StreamOutput(fopen('php://memory', 'w+'));
     }
 
     protected function tearDown(): void
     {
         $this->removeDirectory($this->tempDir);
+    }
+
+    public function testDefaultInformation(): void
+    {
+        $command = new DefaultConfigCommand();
+
+        $name = $command->getName();
+        $description = $command->getDescription();
+
+        $this->assertSame(
+            'Create a default configuration file for the DataMapper bundle: config/packages/data_mapper.yaml',
+            $description
+        );
+        $this->assertSame(
+            'data-mapper:default-config',
+            $name
+        );
     }
 
     /**
@@ -49,9 +71,8 @@ class DefaultConfigCommandTest extends TestCase
         $command = new DefaultConfigCommand();
 
         $input = $this->createMock(InputInterface::class);
-        $output = $this->createMock(OutputInterface::class);
 
-        $result = $command->run($input, $output);
+        $result = $command->run($input, $this->output);
 
         $this->assertSame(Command::SUCCESS, $result);
         $this->assertFileExists($this->configFile);
@@ -59,6 +80,8 @@ class DefaultConfigCommandTest extends TestCase
             file_get_contents($this->defaultConfigFile),
             file_get_contents($this->configFile)
         );
+
+        $this->assertStringContainsString('Default configuration file created at config/packages/data_mapper.yaml', $this->getDisplay());
     }
 
     /**
@@ -75,12 +98,22 @@ class DefaultConfigCommandTest extends TestCase
         $command = new DefaultConfigCommand();
 
         $input = $this->createMock(InputInterface::class);
-        $output = $this->createMock(OutputInterface::class);
 
-        $result = $command->run($input, $output);
+        $result = $command->run($input, $this->output);
 
         $this->assertSame(Command::FAILURE, $result);
         $this->assertSame("existing: true\n", file_get_contents($this->configFile));
+
+        $this->assertStringContainsString('The file config/packages/data_mapper.yaml already exists. No changes were made.', $this->getDisplay());
+    }
+
+    public function getDisplay(): string
+    {
+        rewind($this->output->getStream());
+
+        $display = (string) stream_get_contents($this->output->getStream());
+        $display = str_replace(["\r\n", "\n"], '', $display);
+        return preg_replace('/[ \t]+/', ' ', $display);
     }
 
     private function removeDirectory(string $dir): void
