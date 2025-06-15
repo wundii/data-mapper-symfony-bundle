@@ -7,7 +7,7 @@
 [![Rector](https://img.shields.io/badge/Rector-8.2-blue.svg?style=flat)](https://getrector.com)
 [![ECS](https://img.shields.io/badge/ECS-check-blue.svg?style=flat)](https://tomasvotruba.com/blog/zen-config-in-ecs)
 [![PHPUnit](https://img.shields.io/badge/PHP--Unit-check-blue.svg?style=flat)](https://phpunit.org)
-[![codecov](https://codecov.io/github/wundii/data-mapper-symfony-bundle/branch/main/graph/badge.svg?token=cb7efb4edf7e1a31909c63e5a9fd4b814f000166)](https://app.codecov.io/github/wundii/data-mapper-symfony-bundle)
+[![codecov](https://codecov.io/github/wundii/data-mapper-symfony-bundle/branch/main/graph/badge.svg?token=V61OLHU8X3)](https://codecov.io/github/wundii/data-mapper-symfony-bundle)
 [![Downloads](https://img.shields.io/packagist/dt/wundii/data-mapper-symfony-bundle.svg?style=flat)](https://packagist.org/packages/wundii/data-mapper-symfony-bundle)
 
 A ***Symfony bundle*** providing seamless integration for the [wundii/data-mapper](https://github.com/wundii/data-mapper).
