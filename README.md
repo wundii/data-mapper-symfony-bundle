@@ -36,9 +36,17 @@ A ***Symfony bundle*** providing seamless integration for the [wundii/data-mappe
 - `enum`|`?enum`
 
 ## Supported Formats
+optional formats are marked with an asterisk `*`
 - `array`
 - `json`
+- `neon`*
+- `object`
+  - `public property`
+  - `public getters`
+  - `method toArray()`
+  - `attribute SourceData('...')`
 - `xml`
+- `yaml`*
 
 ## Installation
 Require the bundle and its dependencies with composer:
