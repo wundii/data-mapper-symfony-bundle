@@ -63,7 +63,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('fail', $content);
-        $result = $this->dataMapper->request($request, $object);
+        $result = $this->dataMapper->tryRequest($request, $object);
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
@@ -79,7 +79,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/json', $content);
-        $result = $this->dataMapper->request($request, $object);
+        $result = $this->dataMapper->tryRequest($request, $object);
 
         $this->assertNull($this->dataMapper->getErrorMessage());
         $this->assertEquals(MapStatusEnum::SUCCESS, $this->dataMapper->getMapStatusEnum());
@@ -95,7 +95,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/json', $content);
-        $result = $this->dataMapper->request($request, $object);
+        $result = $this->dataMapper->tryRequest($request, $object);
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
@@ -111,7 +111,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/json', $content);
-        $result = $this->dataMapper->request($request, $object, [], true);
+        $result = $this->dataMapper->tryRequest($request, $object, [], true);
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
@@ -127,7 +127,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/neon', $content);
-        $result = $this->dataMapper->request($request, $object);
+        $result = $this->dataMapper->tryRequest($request, $object);
 
         $this->assertNull($this->dataMapper->getErrorMessage());
         $this->assertEquals(MapStatusEnum::SUCCESS, $this->dataMapper->getMapStatusEnum());
@@ -143,7 +143,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/neon', $content);
-        $result = $this->dataMapper->request($request, $object);
+        $result = $this->dataMapper->tryRequest($request, $object);
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
@@ -159,7 +159,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/neon', $content);
-        $result = $this->dataMapper->request($request, $object, [], true);
+        $result = $this->dataMapper->tryRequest($request, $object, [], true);
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
@@ -176,7 +176,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/xml', $content);
-        $result = $this->dataMapper->request($request, $object);
+        $result = $this->dataMapper->tryRequest($request, $object);
 
         $this->assertNull($this->dataMapper->getErrorMessage());
         $this->assertEquals(MapStatusEnum::SUCCESS, $this->dataMapper->getMapStatusEnum());
@@ -192,7 +192,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/xml', $content);
-        $result = $this->dataMapper->request($request, $object);
+        $result = $this->dataMapper->tryRequest($request, $object);
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
@@ -208,7 +208,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/xml', $content);
-        $result = $this->dataMapper->request($request, $object, [], true);
+        $result = $this->dataMapper->tryRequest($request, $object, [], true);
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
@@ -224,7 +224,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/yaml', $content);
-        $result = $this->dataMapper->request($request, $object);
+        $result = $this->dataMapper->tryRequest($request, $object);
 
         $this->assertNull($this->dataMapper->getErrorMessage());
         $this->assertEquals(MapStatusEnum::SUCCESS, $this->dataMapper->getMapStatusEnum());
@@ -240,7 +240,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/yaml', $content);
-        $result = $this->dataMapper->request($request, $object);
+        $result = $this->dataMapper->tryRequest($request, $object);
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
@@ -256,7 +256,7 @@ class DataMapperTest extends TestCase
         $object = TypeString::class;
 
         $request = $this->getRequest('application/yaml', $content);
-        $result = $this->dataMapper->request($request, $object, [], true);
+        $result = $this->dataMapper->tryRequest($request, $object, [], true);
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
