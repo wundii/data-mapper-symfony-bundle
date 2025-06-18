@@ -11,10 +11,9 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Wundii\DataMapper\DataConfig;
-use Wundii\DataMapper\DataMapper;
 use Wundii\DataMapper\Enum\AccessibleEnum;
 use Wundii\DataMapper\Enum\ApproachEnum;
-use Wundii\DataMapper\Framework\DataMapperSymfony;
+use Wundii\DataMapper\SymfonyBundle\DataMapper;
 
 class DataMapperExtension extends Extension
 {
@@ -51,7 +50,7 @@ class DataMapperExtension extends Extension
         ]);
         $container->setDefinition(DataConfig::class, $dataConfigDef);
 
-        $dataMapperDef = new Definition(DataMapperSymfony::class, [
+        $dataMapperDef = new Definition(DataMapper::class, [
             $dataConfigDef,
         ]);
         $container->setDefinition(DataMapper::class, $dataMapperDef);
