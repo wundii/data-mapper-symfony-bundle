@@ -83,7 +83,42 @@ data_mapper:
           ...: ...
 ```
 
-## Usage
+## Use as Symfony DataMapper version
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller;
+
+use App\Dto\TestClass;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Wundii\DataMapper\SymfonyBundle\DataMapper;
+
+final class YourController extends AbstractController
+{
+    public function __construct(
+        private readonly DataMapper $dataMapper,
+    ) {
+    }
+
+    #[Route('/do-something/', name: 'app_do-something')]
+    public function doSomething(Request $request): Response
+    {
+        // Automatic recognition of the format based on the content type of the request
+        $testClass = $this->dataMapper->request($request, TestClass::class);
+        
+        // Do something with $testClass
+        
+        return $this->json(...);
+    }
+}
+```
+
+## Use as native DataMapper version
 ```php
 <?php
 
@@ -108,7 +143,8 @@ final class YourController extends AbstractController
     #[Route('/do-something/', name: 'app_do-something')]
     public function doSomething(Request $request): Response
     {
-        $testClass = $this->dataMapper->request($request, TestClass::class);
+        // you can use the native DataMapper methods directly
+        $testClass = $this->dataMapper->json($request->getContent(), TestClass::class);
         
         // Do something with $testClass
         
