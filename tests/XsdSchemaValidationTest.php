@@ -16,7 +16,7 @@ class XsdSchemaValidationTest extends TestCase
     {
         $xml = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<config xmlns="http://wundii.com/schema/dic/data_mapper">
+<config>
     <approach>CONSTRUCTOR</approach>
     <accessible>PUBLIC</accessible>
     <class_map>

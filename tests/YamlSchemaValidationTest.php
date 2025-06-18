@@ -22,13 +22,12 @@ class YamlSchemaValidationTest extends TestCase
 
         $this->assertIsArray($parsed);
 
-        $namespace = 'http://wundii.com/schema/dic/data_mapper';
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->formatOutput = true;
 
-        $config = $dom->createElementNS($namespace, 'config');
+        $config = $dom->createElementNS(null, 'config');
         $dom->appendChild($config);
-        $this->arrayToXml($parsed['data_mapper'], $config, $dom, $namespace);
+        $this->arrayToXml($parsed['data_mapper'], $config, $dom, '');
 
         $xml = $dom->saveXML();
 
