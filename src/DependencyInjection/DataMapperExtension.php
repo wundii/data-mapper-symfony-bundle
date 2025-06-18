@@ -14,6 +14,7 @@ use Wundii\DataMapper\DataConfig;
 use Wundii\DataMapper\DataMapper;
 use Wundii\DataMapper\Enum\AccessibleEnum;
 use Wundii\DataMapper\Enum\ApproachEnum;
+use Wundii\DataMapper\Framework\DataMapperSymfony;
 
 class DataMapperExtension extends Extension
 {
@@ -50,7 +51,7 @@ class DataMapperExtension extends Extension
         ]);
         $container->setDefinition(DataConfig::class, $dataConfigDef);
 
-        $dataMapperDef = new Definition(DataMapper::class, [
+        $dataMapperDef = new Definition(DataMapperSymfony::class, [
             $dataConfigDef,
         ]);
         $container->setDefinition(DataMapper::class, $dataMapperDef);

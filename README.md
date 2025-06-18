@@ -82,3 +82,37 @@ data_mapper:
           InterfaceOrClassName: 'ClassName', # Class mapping for interfaces or other classes
           ...: ...
 ```
+
+## Usage
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller;
+
+use App\Dto\TestClass;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Wundii\DataMapper\DataMapper;
+
+final class YourController extends AbstractController
+{
+    public function __construct(
+        private readonly DataMapper $dataMapper,
+    ) {
+    }
+
+    #[Route('/do-something/', name: 'app_do-something')]
+    public function doSomething(Request $request): Response
+    {
+        $testClass = $this->dataMapper->request($request, TestClass::class);
+        
+        // Do something with $testClass
+        
+        return $this->json(...);
+    }
+}
+```
