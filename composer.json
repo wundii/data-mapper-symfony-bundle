@@ -27,6 +27,7 @@
   "require-dev": {
     "ext-dom": "*",
     "ext-libxml": "*",
+    "nette/neon": "^v3.4",
     "phpstan/phpstan": "^2.0",
     "phpstan/phpstan-strict-rules": "^2.0",
     "phpunit/phpunit": "^11.4",
