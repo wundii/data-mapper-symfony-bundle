@@ -109,7 +109,13 @@ final class YourController extends AbstractController
     public function doSomething(Request $request): Response
     {
         // Automatic recognition of the format based on the content type of the request
+        // returns an instance of TestClass or an Exception
         $testClass = $this->dataMapper->request($request, TestClass::class);
+        
+        // or you can use tryRequest to avoid exceptions, null will be returned instead
+        $testClass = $this->dataMapper->tryRequest($request, TestClass::class);
+        $this->dataMapper->getMapStatusEnum();
+        $this->dataMapper->getErrorMessage();
         
         // Do something with $testClass
         
