@@ -1,16 +1,16 @@
 # Wundii\Data-Mapper-Symfony-Bundle
 
-[![PHP-Tests](https://github.com/wundii/data-mapper-symfony-bundle/actions/workflows/code_quality.yml/badge.svg)](https://github.com/wundii/data-mapper-symfony-bundle/actions/workflows/code_quality.yml)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%2010-brightgreen.svg?style=flat)](https://phpstan.org/)
-![VERSION](https://img.shields.io/packagist/v/wundii/data-mapper-symfony-bundle)
-[![PHP](https://img.shields.io/packagist/php-v/wundii/data-mapper-symfony-bundle)](https://www.php.net/)
-[![Rector](https://img.shields.io/badge/Rector-8.2-blue.svg?style=flat)](https://getrector.com)
-[![ECS](https://img.shields.io/badge/ECS-check-blue.svg?style=flat)](https://tomasvotruba.com/blog/zen-config-in-ecs)
-[![PHPUnit](https://img.shields.io/badge/PHP--Unit-check-blue.svg?style=flat)](https://phpunit.org)
-[![codecov](https://codecov.io/github/wundii/data-mapper-symfony-bundle/branch/main/graph/badge.svg?token=V61OLHU8X3)](https://codecov.io/github/wundii/data-mapper-symfony-bundle)
-[![Downloads](https://img.shields.io/packagist/dt/wundii/data-mapper-symfony-bundle.svg?style=flat)](https://packagist.org/packages/wundii/data-mapper-symfony-bundle)
+[![PHP-Tests](https://img.shields.io/github/actions/workflow/status/wundii/data-mapper-symfony-bundle/code_quality.yml?branch=main&style=for-the-badge)](https://github.com/wundii/data-mapper-symfony-bundle/actions/workflows/code_quality.yml)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%2010-brightgreen.svg?style=for-the-badge)](https://phpstan.org/)
+![VERSION](https://img.shields.io/packagist/v/wundii/data-mapper-symfony-bundle?style=for-the-badge)
+[![PHP](https://img.shields.io/packagist/php-v/wundii/data-mapper-symfony-bundle?style=for-the-badge)](https://www.php.net/)
+[![Rector](https://img.shields.io/badge/Rector-8.2-blue.svg?style=for-the-badge)](https://getrector.com)
+[![ECS](https://img.shields.io/badge/ECS-check-blue.svg?style=for-the-badge)](https://tomasvotruba.com/blog/zen-config-in-ecs)
+[![PHPUnit](https://img.shields.io/badge/PHP--Unit-check-blue.svg?style=for-the-badge)](https://phpunit.org)
+[![codecov](https://img.shields.io/codecov/c/github/wundii/data-mapper-symfony-bundle/main?token=V61OLHU8X3&style=for-the-badge)](https://codecov.io/github/wundii/data-mapper-symfony-bundle)
+[![Downloads](https://img.shields.io/packagist/dt/wundii/data-mapper-symfony-bundle.svg?style=for-the-badge)](https://packagist.org/packages/wundii/data-mapper-symfony-bundle)
 
-A ***Symfony bundle*** providing seamless integration for the [wundii/data-mapper](https://github.com/wundii/data-mapper).
+A Symfony integration for [wundii/data-mapper](https://github.com/wundii/data-mapper), optimized for PHP 8.2+, offering high-performance deserialization and strict type mapping of JSON, NEON, objects, XML, YAML, and arrays into PHP classes.
 
 ## Features
 - Mapping source data into objects
