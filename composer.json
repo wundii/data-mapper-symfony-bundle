@@ -1,7 +1,7 @@
 {
   "name": "wundii/data-mapper-symfony-bundle",
   "type": "symfony-bundle",
-  "description": "A Symfony integration for wundii/data-mapper, optimized for PHP 8.2+, offering high-performance deserialization and strict type mapping of JSON, NEON, objects, XML, YAML, and arrays into PHP classes.",
+  "description": "A Symfony integration for wundii/data-mapper, modern and fast object mapper for PHP 8.2+. Strict types. Converts JSON, XML, YAML, NEON, arrays, and objects to PHP objects.",
   "keywords": ["symfony","symfony-bundle","bundle","datamapper","mapper","xml","json","array","object", "deserialization", "deserialize"],
   "license": "MIT",
   "authors": [
