@@ -40,7 +40,7 @@ class DataMapperExtension extends Extension
         }
 
         $approachEnum = ApproachEnum::tryFrom(strtolower($approach));
-        $accessibleEnum = AccessibleEnum::tryFrom(strtolower($accessible));
+        $accessibleEnum = AccessibleEnum::tryFrom(ucfirst(strtolower($accessible)));
         $classMap = $config['class_map'];
 
         $dataConfigDef = new Definition(DataConfig::class, [
