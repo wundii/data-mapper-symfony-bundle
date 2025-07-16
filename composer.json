@@ -1,8 +1,8 @@
 {
   "name": "wundii/data-mapper-symfony-bundle",
   "type": "symfony-bundle",
-  "description": "A Symfony integration for wundii/data-mapper, modern and fast object mapper for PHP 8.2+. Strict types. Converts JSON, XML, YAML, NEON, arrays, and objects to PHP objects.",
-  "keywords": ["symfony","symfony-bundle","bundle","datamapper","mapper","xml","json","array","object", "deserialization", "deserialize"],
+  "description": "A Symfony integration for wundii/data-mapper, modern and fast object mapper for PHP 8.2+. Strict types. Converts CSV, JSON, XML, YAML, NEON, arrays, and objects to PHP objects.",
+  "keywords": ["symfony","symfony-bundle","bundle","datamapper","mapper","xml","json","csv","array","object", "deserialization", "deserialize"],
   "license": "MIT",
   "authors": [
     {
@@ -64,33 +64,15 @@
       "@ecs-dry",
       "@unittest"
     ],
-    "rector-dry": [
-      "php vendor/bin/rector process --dry-run --ansi"
-    ],
-    "rector-apply": [
-      "php vendor/bin/rector process --ansi"
-    ],
-    "ecs-dry": [
-      "php vendor/bin/ecs check"
-    ],
-    "ecs-apply": [
-      "php vendor/bin/ecs check --fix"
-    ],
-    "phpstan": [
-      "php vendor/bin/phpstan analyse"
-    ],
-    "unittest": [
-      "php vendor/bin/phpunit --configuration phpunit.xml"
-    ],
-    "cache-clear": [
-      "rm -R ./Cache/* -f"
-    ],
-    "phplint": [
-      "php vendor/bin/phplint"
-    ],
-    "coverage": [
-      "php vendor/bin/phpunit --coverage-clover coverage.xml"
-    ]
+    "cache-clear": "rm -R ./cache/* -f",
+    "coverage": "php vendor/bin/phpunit --coverage-clover coverage.xml",
+    "ecs-apply": "php vendor/bin/ecs check --fix",
+    "ecs-dry": "php vendor/bin/ecs check",
+    "phplint": "php vendor/bin/phplint",
+    "phpstan": "php vendor/bin/phpstan analyse",
+    "rector-apply": "php vendor/bin/rector process --ansi",
+    "rector-dry": "php vendor/bin/rector process --dry-run --ansi",
+    "unittest": "php vendor/bin/phpunit --configuration phpunit.xml"
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "stable"
 }

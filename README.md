@@ -18,7 +18,7 @@
 
 A Symfony integration for [wundii/data-mapper](https://github.com/wundii/data-mapper). 
 This library is an extremely fast and strictly typed object mapper built for modern PHP (8.2+). 
-It seamlessly transforms data from formats like JSON, NEON, XML, YAML, arrays, and standard objects into well-structured PHP objects.
+It seamlessly transforms data from formats like CSV, JSON, NEON, XML, YAML, array, and standard objects into well-structured PHP objects.
 
 Ideal for developers who need reliable and efficient data mapping without sacrificing code quality or modern best practices.
 
@@ -49,6 +49,7 @@ Ideal for developers who need reliable and efficient data mapping without sacrif
 ## Supported Formats
 optional formats are marked with an asterisk `*`
 - `array`
+- `csv`
 - `json`
 - `neon`*
 - `object`

@@ -7,6 +7,7 @@ namespace Wundii\DataMapper\SymfonyBundle;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Wundii\DataMapper\DataMapper as BaseDataMapper;
+use Wundii\DataMapper\Dto\CsvDto;
 use Wundii\DataMapper\Enum\SourceTypeEnum;
 use Wundii\DataMapper\Exception\DataMapperException;
 use Wundii\DataMapper\SymfonyBundle\Enum\MapStatusEnum;
@@ -35,6 +36,7 @@ class DataMapper extends BaseDataMapper
      * @param class-string<T>|T $object
      * @param string[] $rootElementTree
      * @param bool $forceInstance // create a new instance, if no data can be found for the object
+     * @param string[] $options
      * @return ($object is class-string ? T : T[])
      */
     public function request(
@@ -42,9 +44,11 @@ class DataMapper extends BaseDataMapper
         string|object $object,
         array $rootElementTree = [],
         bool $forceInstance = false,
+        array $options = [],
     ): object|array {
         $content = $request->getContent();
         $sourceTypeEnum = match ($request->headers->get('Content-Type')) {
+            'application/csv', 'text/csv' => SourceTypeEnum::CSV,
             'application/json' => SourceTypeEnum::JSON,
             'application/neon', 'text/neon' => SourceTypeEnum::NEON,
             'application/xml', 'text/xml' => SourceTypeEnum::XML,
@@ -56,6 +60,18 @@ class DataMapper extends BaseDataMapper
             throw DataMapperException::InvalidArgument('No content provided in request');
         }
 
+        if ($sourceTypeEnum === SourceTypeEnum::CSV) {
+            $csvDto = new CsvDto(
+                $content,
+                $options['separator'] ?? CsvDto::DEFAULT_SEPARATOR,
+                $options['enclosure'] ?? CsvDto::DEFAULT_ENCLOSURE,
+                $options['escape'] ?? CsvDto::DEFAULT_ESCAPE,
+                (int) ($options['headerLine'] ?? CsvDto::DEFAULT_HEADER_LINE),
+                (int) ($options['firstLine'] ?? CsvDto::DEFAULT_FIRST_LINE),
+            );
+            $content = $csvDto;
+        }
+
         return $this->map($sourceTypeEnum, $content, $object, $rootElementTree, $forceInstance);
     }
 
@@ -63,6 +79,7 @@ class DataMapper extends BaseDataMapper
      * @param class-string<T>|T $object
      * @param string[] $rootElementTree
      * @param bool $forceInstance // create a new instance, if no data can be found for the object
+     * @param string[] $options
      * @return ($object is class-string ? T : T[])
      */
     public function tryRequest(
@@ -70,6 +87,7 @@ class DataMapper extends BaseDataMapper
         string|object $object,
         array $rootElementTree = [],
         bool $forceInstance = false,
+        array $options = [],
     ): object|array|null {
         /**
          * reset error message
@@ -78,7 +96,7 @@ class DataMapper extends BaseDataMapper
 
         try {
             $this->mapStatusEnum = MapStatusEnum::SUCCESS;
-            return $this->request($request, $object, $rootElementTree, $forceInstance);
+            return $this->request($request, $object, $rootElementTree, $forceInstance, $options);
         } catch (Exception $exception) {
             $this->errorMessage = $exception->getMessage();
             $this->mapStatusEnum = MapStatusEnum::ERROR;
