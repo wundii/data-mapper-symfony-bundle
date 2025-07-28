@@ -16,8 +16,8 @@
 [![codecov](https://img.shields.io/codecov/c/github/wundii/data-mapper-symfony-bundle/main?token=V61OLHU8X3&style=for-the-badge)](https://codecov.io/github/wundii/data-mapper-symfony-bundle)
 [![Downloads](https://img.shields.io/packagist/dt/wundii/data-mapper-symfony-bundle.svg?style=for-the-badge)](https://packagist.org/packages/wundii/data-mapper-symfony-bundle)
 
-A Symfony integration for [wundii/data-mapper](https://github.com/wundii/data-mapper). 
-This library is an extremely fast and strictly typed object mapper built for modern PHP (8.2+). 
+A Symfony integration for [wundii/data-mapper](https://github.com/wundii/data-mapper).
+This library is an extremely fast and strictly typed object mapper built for modern PHP (8.2+).
 It seamlessly transforms data from formats like CSV, JSON, NEON, XML, YAML, array, and standard objects into well-structured PHP objects.
 
 Ideal for developers who need reliable and efficient data mapping without sacrificing code quality or modern best practices.
@@ -91,7 +91,7 @@ data_mapper:
     data_config:
         approach: 'CONSTRUCTOR|PROPERTY|SETTER' # ApproachEnum::SETTER
         accessible: 'PRIVATE|PUBLIC' # AccessibleEnum::PUBLIC
-        class_map: 
+        class_map:
           InterfaceOrClassName: 'ClassName', # Class mapping for interfaces or other classes
           ...: ...
 ```
@@ -124,14 +124,14 @@ final class YourController extends AbstractController
         // Automatic recognition of the format based on the content type of the request
         // returns an instance of TestClass or an Exception
         $testClass = $this->dataMapper->request($request, TestClass::class);
-        
+
         // or you can use tryRequest to avoid exceptions, null will be returned instead
         $testClass = $this->dataMapper->tryRequest($request, TestClass::class);
         $this->dataMapper->getMapStatusEnum();
         $this->dataMapper->getErrorMessage();
-        
+
         // Do something with $testClass
-        
+
         return $this->json(...);
     }
 }
@@ -164,9 +164,9 @@ final class YourController extends AbstractController
     {
         // you can use the native DataMapper methods directly
         $testClass = $this->dataMapper->json($request->getContent(), TestClass::class);
-        
+
         // Do something with $testClass
-        
+
         return $this->json(...);
     }
 }
