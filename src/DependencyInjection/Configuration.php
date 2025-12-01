@@ -13,6 +13,9 @@ use Wundii\DataMapper\Enum\ApproachEnum;
 
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * @return TreeBuilder<'array'>
+     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $approach = array_map(
@@ -26,7 +29,6 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder = new TreeBuilder('data_mapper');
 
-        /** @phpstan-ignore-next-line  */
         $treeBuilder->getRootNode()
             ->children()
             ->enumNode('approach')
