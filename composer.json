@@ -35,7 +35,7 @@
     "symfony/var-dumper": "7.4.0 || 8.0.0",
     "symfony/yaml": "7.4.0 || 8.0.0",
     "symplify/easy-coding-standard": "13.0.0",
-    "wundii/phplint": "0.3.3"
+    "wundii/phplint": "0.3.4"
   },
   "autoload": {
     "psr-4": {
