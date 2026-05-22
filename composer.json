@@ -2,7 +2,20 @@
   "name": "wundii/data-mapper-symfony-bundle",
   "type": "symfony-bundle",
   "description": "A Symfony integration for wundii/data-mapper, modern and fast object mapper for PHP 8.2+. Strict types. Converts CSV, JSON, XML, YAML, NEON, arrays, and objects to PHP objects.",
-  "keywords": ["symfony","symfony-bundle","bundle","datamapper","mapper","xml","json","csv","array","object", "deserialization", "deserialize"],
+  "keywords": [
+    "symfony",
+    "symfony-bundle",
+    "bundle",
+    "datamapper",
+    "mapper",
+    "xml",
+    "json",
+    "csv",
+    "array",
+    "object",
+    "deserialization",
+    "deserialize"
+  ],
   "license": "MIT",
   "authors": [
     {
@@ -32,8 +45,8 @@
     "phpstan/phpstan-strict-rules": "2.0.11",
     "phpunit/phpunit": "11.5.50",
     "rector/rector": "2.4.3",
-    "symfony/var-dumper": "7.4.0 || 8.0.0",
-    "symfony/yaml": "7.4.0 || 8.0.0",
+    "symfony/var-dumper": "^7.4 || ^8.0",
+    "symfony/yaml": "^7.4 || ^8.0",
     "symplify/easy-coding-standard": "13.1.3",
     "wundii/phplint": "0.3.4"
   },
@@ -48,8 +61,6 @@
     }
   },
   "scripts": {
-    "auto-scripts": {
-    },
     "post-install-cmd": [
       "@auto-scripts"
     ],
