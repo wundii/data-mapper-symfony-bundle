@@ -12,10 +12,6 @@ use Wundii\DataMapper\Enum\SourceTypeEnum;
 use Wundii\DataMapper\Exception\DataMapperException;
 use Wundii\DataMapper\SymfonyBundle\Enum\MapStatusEnum;
 
-/**
- * @template T of object
- * @extends BaseDataMapper<T>
- */
 class DataMapper extends BaseDataMapper
 {
     private ?string $errorMessage = null;
@@ -33,6 +29,7 @@ class DataMapper extends BaseDataMapper
     }
 
     /**
+     * @template T of object
      * @param class-string<T>|T $object
      * @param string[] $rootElementTree
      * @param bool $forceInstance // create a new instance, if no data can be found for the object
@@ -76,6 +73,7 @@ class DataMapper extends BaseDataMapper
     }
 
     /**
+     * @template T of object
      * @param class-string<T>|T $object
      * @param string[] $rootElementTree
      * @param bool $forceInstance // create a new instance, if no data can be found for the object
