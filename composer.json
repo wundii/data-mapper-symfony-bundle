@@ -67,23 +67,30 @@
     "post-update-cmd": [
       "@auto-scripts"
     ],
-    "complete-check": [
-      "@cache-clear",
+    "analyze": [
       "@phplint",
-      "@rector-dry",
-      "@phpstan",
-      "@ecs-dry",
-      "@unittest"
+      "vendor/bin/rector process --dry-run --ansi",
+      "vendor/bin/ecs check",
+      "@stan"
+    ],
+    "format": [
+      "vendor/bin/rector process",
+      "vendor/bin/ecs check --fix"
     ],
     "cache-clear": "rm -R ./cache/* -f",
-    "coverage": "php vendor/bin/phpunit --coverage-clover coverage.xml",
-    "ecs-apply": "php vendor/bin/ecs check --fix",
-    "ecs-dry": "php vendor/bin/ecs check",
-    "phplint": "php vendor/bin/phplint",
-    "phpstan": "php vendor/bin/phpstan analyse",
-    "rector-apply": "php vendor/bin/rector process --ansi",
-    "rector-dry": "php vendor/bin/rector process --dry-run --ansi",
-    "unittest": "php vendor/bin/phpunit --configuration phpunit.xml"
+    "coverage": "vendor/bin/phpunit --coverage-clover coverage.xml",
+    "phplint": "vendor/bin/phplint",
+    "stan": "vendor/bin/phpstan analyze",
+    "qa": [
+      "@cache-clear",
+      "@analyze",
+      "@test"
+    ],
+    "qa-dry": [
+      "@cache-clear",
+      "@analyze"
+    ],
+    "test": "vendor/bin/phpunit"
   },
   "minimum-stability": "stable"
 }
