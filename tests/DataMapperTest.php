@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Wundii\DataMapper\SymfonyBundle\Tests;
 
-use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Wundii\DataMapper\DataConfig;
 use Wundii\DataMapper\Enum\ApproachEnum;
@@ -25,28 +22,16 @@ class DataMapperTest extends TestCase
         $this->dataMapper = new DataMapper($dataConfig);
     }
 
-    /**
-     * @throws Exception
-     */
     public function getRequest(
         string $contentType,
         string $content
-    ): Request|MockObject {
-        $headerBag = $this->createMock(HeaderBag::class);
-        $headerBag->expects($this->once())
-            ->method('get')
-            ->with('Content-Type')
-            ->willReturn($contentType);
-
-        $request = $this->createMock(Request::class);
-        $request->expects($this->once())
-            ->method('getContent')
-            ->willReturn($content);
-
-        $request->headers = $headerBag;
-
-        return $request;
-
+    ): Request {
+        return new Request(
+            server: [
+                'CONTENT_TYPE' => $contentType,
+            ],
+            content: $content,
+        );
     }
 
     public function expectedObject(): TypeString
@@ -54,9 +39,6 @@ class DataMapperTest extends TestCase
         return new TypeString('test');
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithInvalidContentTypes(): void
     {
         $content = '{"name": "test"}';
@@ -70,9 +52,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('Unsupported content type', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithValidContentTypeJson(): void
     {
         $content = '{"string": "test"}';
@@ -86,9 +65,6 @@ class DataMapperTest extends TestCase
         $this->assertEquals($this->expectedObject(), $result);
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeJson(): void
     {
         $content = '';
@@ -102,9 +78,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('No content provided in request', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeJsonAndForceInstance(): void
     {
         $content = '';
@@ -118,9 +91,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('Invalid Json string', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithValidContentTypeNeon(): void
     {
         $content = 'string: "test"';
@@ -134,9 +104,6 @@ class DataMapperTest extends TestCase
         $this->assertEquals($this->expectedObject(), $result);
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeNeon(): void
     {
         $content = '';
@@ -150,9 +117,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('No content provided in request', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeNeonAndForceInstance(): void
     {
         $content = '';
@@ -166,9 +130,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('Invalid Neon decode return', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithValidContentTypeXml(): void
     {
         $content = '<?xml version="1.0" encoding="UTF-8" ?>' .
@@ -183,9 +144,6 @@ class DataMapperTest extends TestCase
         $this->assertEquals($this->expectedObject(), $result);
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeXml(): void
     {
         $content = '';
@@ -199,9 +157,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('No content provided in request', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeXmlAndForceInstance(): void
     {
         $content = '';
@@ -215,9 +170,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('Invalid XML: String could not be parsed as XML', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithValidContentTypeYaml(): void
     {
         $content = 'string: "test"';
@@ -231,9 +183,6 @@ class DataMapperTest extends TestCase
         $this->assertEquals($this->expectedObject(), $result);
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeYaml(): void
     {
         $content = '';
@@ -247,9 +196,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('No content provided in request', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeYamlAndForceInstance(): void
     {
         $content = '';
@@ -263,9 +209,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('Invalid Yaml decode return', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithValidContentTypeCsv(): void
     {
         $content = "string\ntest\n";
@@ -279,9 +222,6 @@ class DataMapperTest extends TestCase
         $this->assertEquals([$this->expectedObject()], $result);
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeCsv(): void
     {
         $content = '';
@@ -295,9 +235,6 @@ class DataMapperTest extends TestCase
         $this->assertSame('No content provided in request', $this->dataMapper->getErrorMessage());
     }
 
-    /**
-     * @throws Exception
-     */
     public function testRequestWithEmptyContentTypeCsvAndForceInstance(): void
     {
         $content = '';
