@@ -47,7 +47,7 @@
     "rector/rector": "2.4.5",
     "symfony/var-dumper": "^7.4 || ^8.0",
     "symfony/yaml": "^7.4 || ^8.0",
-    "symplify/easy-coding-standard": "13.2.2",
+    "symplify/easy-coding-standard": "13.2.7",
     "wundii/phplint": "0.3.4"
   },
   "autoload": {
