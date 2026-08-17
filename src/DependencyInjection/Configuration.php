@@ -41,7 +41,8 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->arrayNode('class_map')
             ->useAttributeAsKey('interface')
-            ->scalarPrototype()->end()
+            ->scalarPrototype()
+            ->end()
             ->defaultValue([
                 DateTimeInterface::class => DateTime::class,
             ])

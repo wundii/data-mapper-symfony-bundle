@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\SetList;
@@ -21,7 +20,7 @@ return static function (RectorConfig $rectorConfig): void
     );
 
     $rectorConfig->sets([
-        PHPUnitSetList::PHPUNIT_100,
+        PHPUnitSetList::COMPOSER_BASED,
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
         SetList::CODE_QUALITY,
         SetList::CODING_STYLE,
@@ -34,7 +33,6 @@ return static function (RectorConfig $rectorConfig): void
     ]);
 
     $rectorConfig->skip([
-        ExplicitBoolCompareRector::class,
         RenameParamToMatchTypeRector::class => [
             __DIR__ . '/src/DependencyInjection/DataMapperExtension.php',
         ],
