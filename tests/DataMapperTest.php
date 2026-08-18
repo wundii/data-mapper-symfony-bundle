@@ -245,6 +245,6 @@ class DataMapperTest extends TestCase
 
         $this->assertNull($result);
         $this->assertEquals(MapStatusEnum::ERROR, $this->dataMapper->getMapStatusEnum());
-        $this->assertStringContainsString('The file "" could not be written', $this->dataMapper->getErrorMessage());
+        $this->assertStringContainsString('Invalid object from CsvResolver, could not create an instance of', $this->dataMapper->getErrorMessage());
     }
 }
