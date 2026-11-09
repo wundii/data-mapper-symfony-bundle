@@ -31,7 +31,7 @@
     "ext-simplexml": "*",
     "ext-spl": "*",
     "ext-xml": "*",
-    "symfony/config": "^6.4 || ^7.4 || ^8.0",
+    "symfony/config": "^8.1.10",
     "symfony/console": "^6.4 || ^7.4 || ^8.0",
     "symfony/dependency-injection": "^6.4 || ^7.4 || ^8.0",
     "symfony/http-kernel": "^6.4 || ^7.4 || ^8.0",
